@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Generated — reproducible from src/generate_data.py, so not tracked.
+# Committing generated artifacts is a habit worth not forming.
+data/raw/
+data/processed/
+data/*.db
