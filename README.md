@@ -10,10 +10,7 @@ training ground. Everything here is fake. Nothing here is clean.
 Create the AI from the ground up myself within 3 years.
 **Achievable in three years, comfortably:** implement a transformer from
 scratch in PyTorch, write your own tokenizer, train a small language model
-on a corpus you choose, fine-tune open-weight models, and understand every
-line of it. People do this. You have a stats degree and you already write
-working ETL code, which puts you further along than most people who start.
-
+on a corpus I choose, fine-tune open-weight models.
 **Not achievable, and not because of you:** a frontier model. Training runs
 at that scale cost eight to nine figures in compute. Nobody builds one
 alone. If someone tells you otherwise they're selling a course.
