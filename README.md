@@ -7,31 +7,17 @@ training ground. Everything here is fake. Nothing here is clean.
 
 ## The honest version of the goal
 
-You said "create the AI from the ground up myself within 3 years." Two
-different things live inside that sentence, and it's worth separating them
-before you spend three years.
-
+Create the AI from the ground up myself within 3 years.
 **Achievable in three years, comfortably:** implement a transformer from
-scratch in PyTorch, write your own tokenizer, train a small language model
-on a corpus you choose, fine-tune open-weight models, and understand every
-line of it. People do this. You have a stats degree and you already write
-working ETL code, which puts you further along than most people who start.
-
-**Not achievable, and not because of you:** a frontier model. Training runs
-at that scale cost eight to nine figures in compute. Nobody builds one
-alone. If someone tells you otherwise they're selling a course.
-
-The first thing is the real goal. It's also the thing that makes you
-employable as a healthcare data scientist, which is the outcome you
-actually described wanting.
+scratch in PyTorch, write my own tokenizer, train a small language model
+on a corpus I choose, fine-tune open-weight models.
 
 ---
 
 ## Roadmap
 
 Budget **6–8 hours a week**. That is the number that survives contact with
-two kids and a full-time job. Sixteen hours one week and zero for a month
-is how this dies.
+two kids and a full-time job.
 
 ### Year 1 — Foundations
 
@@ -135,25 +121,8 @@ wrong — not the data.
 
 ---
 
-## How to work through this
 
-`EXERCISES.md` has twelve exercises in order. Each one names a specific
-skill and tells you what "done" looks like.
 
-Rules that make this work:
 
-- **Write code in `src/`, not in notebooks.** Notebooks are for looking at
-  things. Functions that other code depends on go in modules, where they
-  can be tested. This habit separates analysts from engineers.
-- **Run `pytest` constantly.** The tests in `tests/` describe what your
-  cleaning functions must do. Red to green is the loop.
-- **Commit after every exercise.** Small commits, real messages. Three
-  years from now your git history is a resume.
-- **Don't open `solutions/` until you've genuinely tried.** Reading a
-  solution feels like learning and isn't. Struggle first, then compare —
-  the comparison is where the learning actually happens.
-- **Don't let an AI write the code for you.** Use one to explain a concept,
-  review something you wrote, or unstick you after twenty minutes. Not to
-  produce the thing. The typing is where the knowledge forms.
 
-Start with Exercise 1.
+
