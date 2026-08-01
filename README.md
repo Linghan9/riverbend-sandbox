@@ -121,25 +121,8 @@ wrong — not the data.
 
 ---
 
-## How to work through this
 
-`EXERCISES.md` has twelve exercises in order. Each one names a specific
-skill and tells you what "done" looks like.
 
-Rules that make this work:
 
-- **Write code in `src/`, not in notebooks.** Notebooks are for looking at
-  things. Functions that other code depends on go in modules, where they
-  can be tested. This habit separates analysts from engineers.
-- **Run `pytest` constantly.** The tests in `tests/` describe what your
-  cleaning functions must do. Red to green is the loop.
-- **Commit after every exercise.** Small commits, real messages. Three
-  years from now your git history is a resume.
-- **Don't open `solutions/` until you've genuinely tried.** Reading a
-  solution feels like learning and isn't. Struggle first, then compare —
-  the comparison is where the learning actually happens.
-- **Don't let an AI write the code for you.** Use one to explain a concept,
-  review something you wrote, or unstick you after twenty minutes. Not to
-  produce the thing. The typing is where the knowledge forms.
 
 
