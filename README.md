@@ -9,23 +9,15 @@ training ground. Everything here is fake. Nothing here is clean.
 
 Create the AI from the ground up myself within 3 years.
 **Achievable in three years, comfortably:** implement a transformer from
-scratch in PyTorch, write your own tokenizer, train a small language model
+scratch in PyTorch, write my own tokenizer, train a small language model
 on a corpus I choose, fine-tune open-weight models.
-**Not achievable, and not because of you:** a frontier model. Training runs
-at that scale cost eight to nine figures in compute. Nobody builds one
-alone. If someone tells you otherwise they're selling a course.
-
-The first thing is the real goal. It's also the thing that makes you
-employable as a healthcare data scientist, which is the outcome you
-actually described wanting.
 
 ---
 
 ## Roadmap
 
 Budget **6–8 hours a week**. That is the number that survives contact with
-two kids and a full-time job. Sixteen hours one week and zero for a month
-is how this dies.
+two kids and a full-time job.
 
 ### Year 1 — Foundations
 
@@ -150,4 +142,4 @@ Rules that make this work:
   review something you wrote, or unstick you after twenty minutes. Not to
   produce the thing. The typing is where the knowledge forms.
 
-Start with Exercise 1.
+
