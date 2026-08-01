@@ -7,10 +7,7 @@ training ground. Everything here is fake. Nothing here is clean.
 
 ## The honest version of the goal
 
-You said "create the AI from the ground up myself within 3 years." Two
-different things live inside that sentence, and it's worth separating them
-before you spend three years.
-
+Create the AI from the ground up myself within 3 years.
 **Achievable in three years, comfortably:** implement a transformer from
 scratch in PyTorch, write your own tokenizer, train a small language model
 on a corpus you choose, fine-tune open-weight models, and understand every
