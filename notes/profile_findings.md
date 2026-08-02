@@ -22,8 +22,8 @@ Being wrong in writing is how calibration develops.
 
 ## My predictions
 
-- Distinct department spellings I expect to find:
-- Fraction of lab values I expect to be unparseable:
-- Anything I bet is broken that the profiler hasn't shown yet:
+- Distinct department spellings I expect to find:6
+- Fraction of lab values I expect to be unparseable:80%
+- Anything I bet is broken that the profiler hasn't shown yet: missing data, misspelling, number errors etc etc 
 
 ## What actually turned out to be true
