@@ -11,3 +11,4 @@ htmlcov/
 data/raw/
 data/processed/
 data/*.db
+notes/profile_output.txt
