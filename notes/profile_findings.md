@@ -1,3 +1,6 @@
+## Finding Aug 3rd, 12:00 p.m.,2026
+December Length of stay (LOS) has unit measured in days * 24 (hours) while June LOS has unit measured in days. 
+
 ## Finding Aug 3rd, 2026 
 30 spellings across only 5 departments, Emergency missing entirely, and invisible whitespace duplicates.
 
