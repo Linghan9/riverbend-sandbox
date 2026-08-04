@@ -25,10 +25,51 @@ def parse_flexible_date(value: str | None) -> pd.Timestamp:
     Do not use a bare pd.to_datetime with no format — it will silently
     guess wrong on ambiguous values and you will not notice for weeks.
     """
-    raise NotImplementedError
+    s = "" if value is None else str(value).strip()
+    if not s:
+        return pd.NaT
+    for fmt in ("%Y-%m-%d", "%m/%d/%Y", "%d-%b-%Y"):
+        try:
+            return pd.to_datetime(s, format=fmt)
+        except (ValueError, TypeError):
+            continue
+    return pd.NaT
 
+
+_DEPT_MAP = {
+        "cardiology": "Cardiology",
+        "cardio": "Cardiology",
+        "gen med": "General Medicine",
+        "general Med": "General Medicine",
+        "orthopedics": "Orthopedics",
+        "orthopaedics": "Orthopedics",
+        "ortho": "Orthopedics",
+        "pulmonology": "Pulmonology",
+        "pulmonary": "Pulmonology",
+        "pulm": "Pulmonology",
+        "pULMONOLOGY": "Pulmonology",
+        "nephrology": "Nephrology",
+        "nephro": "Nephrology",
+        "renal": "Nephrology",
+        "emergency": "Emergency",
+        "ed": "Emergency",
+        "er": "Emergency",
+        "emergency dept": "Emergency",
+        "emergency department": "Emergency",
+        "general  medicine": "General Medicine",
+        "gen med": "General Medicine",
+        "general medicine": "General Medicine",
+        "gen. medicine": "General Medicine"
+    }
 
 def normalize_department(value: str | None) -> str | None:
+
+    d = "" if value is None else " ".join(str(value).split()).lower()
+    if not d:
+        return None 
+    return _DEPT_MAP.get(d.lower())
+
+        
     """
     Collapse the department spelling variants to a canonical name.
 
