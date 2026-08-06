@@ -84,7 +84,21 @@ def normalize_department(value: str | None) -> str | None:
     raise NotImplementedError
 
 
+_GENDER_MAP = {
+    "m": "M",
+    "male": "M",
+    "1": "M",
+    "f": "F",
+    "female": "F",
+    "2": "F",
+    "u": None,
+    "": None,
+    None: None
+}
 def normalize_sex(value: str | None) -> str | None:
+    g = "" if value is None else str(value).strip().lower()
+    return _GENDER_MAP.get(g)
+
     """
     Map the eight observed codes to "M", "F", or None.
 
@@ -100,15 +114,14 @@ def normalize_sex(value: str | None) -> str | None:
 
 
 def parse_currency(value: str | None) -> float | None:
-    """
-    "$1,234.56" -> 1234.56
-    "1,234.56"  -> 1234.56
-    "-45.00"    -> -45.0
-    ""          -> None
+    c = "" if value is None else str(value).replace("$", "").replace(",", "")
+    if not c:
+        return None
+    try:
+        return float(c)
+    except ValueError:
+        return None
 
-    Negative values are real (adjustments). Do not clip them to zero.
-    """
-    raise NotImplementedError
 
 
 def parse_lab_value(value: str | None) -> tuple[float | None, bool]:
