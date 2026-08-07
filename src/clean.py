@@ -11,6 +11,7 @@ Pure functions are trivially testable, and that is not a coincidence.
 from __future__ import annotations
 
 import pandas as pd
+import re
 
 
 def parse_flexible_date(value: str | None) -> pd.Timestamp:
@@ -125,6 +126,20 @@ def parse_currency(value: str | None) -> float | None:
 
 
 def parse_lab_value(value: str | None) -> tuple[float | None, bool]:
+    l = "" if value is None else str(value).strip()
+    if not l:
+        return (None, False) 
+    
+    Censored = l.startswith("<") or l.startswith(">")
+    if Censored:
+        l = l[1:].strip()
+        return (float(l), True)
+
+    m = re.match(r"^[-+]?\d*\.?\d+", l)
+    if not m:
+        return (None, False)
+    return (float(m.group()), Censored)
+
     """
     Return (numeric_value, was_censored).
 
@@ -143,6 +158,12 @@ def parse_lab_value(value: str | None) -> tuple[float | None, bool]:
 
 
 def normalize_zip(value: str | None) -> str | None:
+    z = "" if value is None else str(value).strip().split("-")[0]
+    if len(z) == 5 and z.isdigit():
+        return z
+    return None
+
+
     """
     "23060"      -> "23060"
     " 23060"     -> "23060"
