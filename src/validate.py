@@ -1,21 +1,28 @@
-from modulefinder import test
+
 
 import pandas as pd
 import pathlib as path 
 
+billing = pd.read_csv("../data/raw/billing.csv")
+encounter = pd.read_csv("../data/raw/encounters.csv")
+labs = pd.read_csv("../data/raw/labs.csv", sep=";")
+patient = pd.read_csv("../data/raw/patients.csv")
 
 
-df1 = "billing"["encounter_id"].unique()
-df2 = "encounters"["encounter_id"].unique() 
 
-def find_orphans (df: pd.DataFrame, col: str) -> pd.DataFrame:
-    billing = pd.read_csv("../data/raw/billing.csv")
-    encounters = pd.read_csv("../data/raw/encounters.csv")
+def find_orphans (child_df, child_key, parent_df, parent_key):
 
-    check =  billing["encounter_id"].isin(encounters["encounter_id"]) 
-    orphans = billing[~check]
+    check =  child_df[child_key].isin(parent_df[parent_key]) 
+    orphans = child_df[~check]
+    return {
+    "check_name": f"{child_key} -> {parent_key}",
+    "count": len(orphans),
+    "pct": len(orphans) / len(child_df) * 100,
+    "example_ids": orphans[child_key].head(5).tolist()
+}
+print(labs.columns.tolist())
+print(find_orphans(billing, "encounter_id", encounter, "encounter_id"))
+print(find_orphans(labs, "encounter_id", encounter, "encounter_id"))
+print(find_orphans(encounter, "patient_id", patient, "patient_id"))
+print(patient[patient["patient_id"] == "PT999019"])
 
-    fake = billing.head(3).copy()
-    fake["encounter_id"] = "DEFINITELY_NOT_REAL"
-    test = pd.concat([billing, fake])
-    print(len(test[~test["encounter_id"].isin(encounters["encounter_id"])]))
