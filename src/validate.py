@@ -2,11 +2,15 @@
 
 import pandas as pd
 import pathlib as path 
+from clean import parse_flexible_date 
 
 billing = pd.read_csv("../data/raw/billing.csv")
 encounter = pd.read_csv("../data/raw/encounters.csv")
 labs = pd.read_csv("../data/raw/labs.csv", sep=";")
 patient = pd.read_csv("../data/raw/patients.csv")
+
+encounter["admit_date"] = encounter["admit_date"].apply(parse_flexible_date)
+encounter["discharge_date"] = encounter["discharge_date"].apply(parse_flexible_date)
 
 
 
@@ -39,4 +43,7 @@ print(dupes["patient_id"].str.startswith("PT9").sum())
 weak = dupes[~dupes["patient_id"].str.startswith("PT9")]
 print(len(weak))
 print(weak.sort_values(["birth_date", "zip_code"]).head(6))
+print(encounter["admit_date"].dtype)
 
+backwards = encounter[encounter["discharge_date"] < encounter["admit_date"]]
+print(len(backwards))
