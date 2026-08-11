@@ -30,4 +30,13 @@ print("encounter", encounter.duplicated().sum())
 print("labs", labs.duplicated().sum())
 print("patient", patient.duplicated().sum())
 print(encounter[encounter.duplicated(keep=False)].sort_values("encounter_id").head(10))
+print(patient.duplicated(subset=["birth_date", "zip_code"], keep=False).sum())
+
+dupes = patient[patient.duplicated(subset=["birth_date", "zip_code"], keep=False)]
+print(dupes.sort_values(["birth_date", "zip_code"]).head(10))
+
+print(dupes["patient_id"].str.startswith("PT9").sum())
+weak = dupes[~dupes["patient_id"].str.startswith("PT9")]
+print(len(weak))
+print(weak.sort_values(["birth_date", "zip_code"]).head(6))
 
