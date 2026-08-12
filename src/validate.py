@@ -52,3 +52,19 @@ print(encounter["discharge_date"].isna().sum())
 raw_encounter = pd.read_csv("../data/raw/encounters.csv")
 print(raw_encounter["discharge_date"].isna().sum())
 
+computed = (encounter["discharge_date"] - encounter["admit_date"]).dt.days
+print(computed.head())
+print(encounter["length_of_stay"].head(10))
+
+computed = (encounter["discharge_date"] - encounter["admit_date"]).dt.days
+mismatch = encounter[computed != encounter["length_of_stay"]]
+print(len(mismatch))
+
+real_mismatch = encounter[computed.notna() & (computed != encounter["length_of_stay"])]
+diff = real_mismatch["length_of_stay"] - computed[real_mismatch.index]
+print(diff.describe())
+print(diff.value_counts().head(15))
+print(real_mismatch[["encounter_id", "admit_date", "discharge_date", "length_of_stay"]].head(10))
+
+
+
