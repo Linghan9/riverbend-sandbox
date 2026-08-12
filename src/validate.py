@@ -47,3 +47,8 @@ print(encounter["admit_date"].dtype)
 
 backwards = encounter[encounter["discharge_date"] < encounter["admit_date"]]
 print(len(backwards))
+print(encounter["admit_date"].isna().sum())
+print(encounter["discharge_date"].isna().sum())
+raw_encounter = pd.read_csv("../data/raw/encounters.csv")
+print(raw_encounter["discharge_date"].isna().sum())
+
