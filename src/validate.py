@@ -62,9 +62,11 @@ print(len(mismatch))
 
 real_mismatch = encounter[computed.notna() & (computed != encounter["length_of_stay"])]
 diff = real_mismatch["length_of_stay"] - computed[real_mismatch.index]
+# encounter["length_of_stay"] = encounter["length_of_stay"].replace(-1, pd.NA)
+
+
 print(diff.describe())
 print(diff.value_counts().head(15))
 print(real_mismatch[["encounter_id", "admit_date", "discharge_date", "length_of_stay"]].head(10))
-
-
-
+print(encounter["length_of_stay"].value_counts().head(10))
+print((encounter["length_of_stay"] == -1).sum())
