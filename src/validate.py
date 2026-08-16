@@ -24,6 +24,18 @@ def find_orphans (child_df, child_key, parent_df, parent_key):
     "pct": len(orphans) / len(child_df) * 100,
     "example_ids": orphans[child_key].head(5).tolist()
 }
+
+def find_exact_duplicates (df, label):
+    dupes = df[df.duplicated(keep = False)]
+    return {
+        "check_name": f"exact duplicate rows: {label}",
+        "count": len(dupes),
+        "pct": len(dupes) / len(df) * 100,
+        "example_ids": [],
+    }
+    
+print(find_exact_duplicates(encounter, "encounters"))
+
 print(labs.columns.tolist())
 print(find_orphans(billing, "encounter_id", encounter, "encounter_id"))
 print(find_orphans(labs, "encounter_id", encounter, "encounter_id"))
