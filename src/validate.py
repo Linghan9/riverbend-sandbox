@@ -4,6 +4,9 @@ import pandas as pd
 import pathlib as path 
 from clean import parse_flexible_date 
 
+pd.set_option("display.max_columns", None)
+pd.set_option("display.width", 200)
+
 billing = pd.read_csv("../data/raw/billing.csv")
 encounter = pd.read_csv("../data/raw/encounters.csv")
 labs = pd.read_csv("../data/raw/labs.csv", sep=";")
@@ -14,12 +17,12 @@ encounter["discharge_date"] = encounter["discharge_date"].apply(parse_flexible_d
 
 
 
-def find_orphans (child_df, child_key, parent_df, parent_key):
+def find_orphans (child_df, child_key, parent_df, parent_key, label):
 
     check =  child_df[child_key].isin(parent_df[parent_key]) 
     orphans = child_df[~check]
     return {
-    "check_name": f"{child_key} -> {parent_key}",
+    "check_name": f"orphan FK:{label}",
     "count": len(orphans),
     "pct": len(orphans) / len(child_df) * 100,
     "example_ids": orphans[child_key].head(5).tolist()
@@ -33,52 +36,47 @@ def find_exact_duplicates (df, label):
         "pct": len(dupes) / len(df) * 100,
         "example_ids": [],
     }
-    
-print(find_exact_duplicates(encounter, "encounters"))
 
-print(labs.columns.tolist())
-print(find_orphans(billing, "encounter_id", encounter, "encounter_id"))
-print(find_orphans(labs, "encounter_id", encounter, "encounter_id"))
-print(find_orphans(encounter, "patient_id", patient, "patient_id"))
-print(patient[patient["patient_id"] == "PT999019"])
-print("billing", billing.duplicated().sum())
-print("encounter", encounter.duplicated().sum())
-print("labs", labs.duplicated().sum())
-print("patient", patient.duplicated().sum())
-print(encounter[encounter.duplicated(keep=False)].sort_values("encounter_id").head(10))
-print(patient.duplicated(subset=["birth_date", "zip_code"], keep=False).sum())
+def find_duplicate_patients(df, subset):
+    dupes = df[df.duplicated(subset=subset, keep=False)]
+    return {
+        "check_name" :f"suspected duplicate patients: {' + '.join(subset)}",
+        "count": len(dupes),
+        "pct": len(dupes)/ len(df) *100,
+        "example_ids": dupes["patient_id"].head(5).tolist(),
+    }
 
-dupes = patient[patient.duplicated(subset=["birth_date", "zip_code"], keep=False)]
-print(dupes.sort_values(["birth_date", "zip_code"]).head(10))
+def find_missing_values(df, column, label):
+    missing = df[df[column].isna()]
+    return {
+        "check_name": f"missing values: {label}",
+        "count": len(missing),
+        "pct": len(missing)/len(df)* 100,
+        "example_ids":[],
+    }
 
-print(dupes["patient_id"].str.startswith("PT9").sum())
-weak = dupes[~dupes["patient_id"].str.startswith("PT9")]
-print(len(weak))
-print(weak.sort_values(["birth_date", "zip_code"]).head(6))
-print(encounter["admit_date"].dtype)
-
-backwards = encounter[encounter["discharge_date"] < encounter["admit_date"]]
-print(len(backwards))
-print(encounter["admit_date"].isna().sum())
-print(encounter["discharge_date"].isna().sum())
-raw_encounter = pd.read_csv("../data/raw/encounters.csv")
-print(raw_encounter["discharge_date"].isna().sum())
-
-computed = (encounter["discharge_date"] - encounter["admit_date"]).dt.days
-print(computed.head())
-print(encounter["length_of_stay"].head(10))
-
-computed = (encounter["discharge_date"] - encounter["admit_date"]).dt.days
-mismatch = encounter[computed != encounter["length_of_stay"]]
-print(len(mismatch))
-
-real_mismatch = encounter[computed.notna() & (computed != encounter["length_of_stay"])]
-diff = real_mismatch["length_of_stay"] - computed[real_mismatch.index]
-# encounter["length_of_stay"] = encounter["length_of_stay"].replace(-1, pd.NA)
+def find_sentinel_values(df, column, sentinel, label):
+    hits = df[df[column] == sentinel]
+    return {
+        "check_name": f"sentinel value: {sentinel}: {label}",
+        "count": len(hits),
+        "pct": len(hits)/len(df) * 100,
+        "example_ids":[],
+    }
 
 
-print(diff.describe())
-print(diff.value_counts().head(15))
-print(real_mismatch[["encounter_id", "admit_date", "discharge_date", "length_of_stay"]].head(10))
-print(encounter["length_of_stay"].value_counts().head(10))
-print((encounter["length_of_stay"] == -1).sum())
+
+
+
+results = [
+    find_orphans(billing,"encounter_id", encounter, "encounter_id", "billing -> encounters"),
+    find_orphans(labs, "encounter_id", encounter, "encounter_id", "labs -> encounters"),
+    find_orphans(encounter, "patient_id", patient, "patient_id", "encounters -> patients"),
+    find_exact_duplicates(encounter, "encounters"),
+    find_duplicate_patients(patient, ["birth_date", "zip_code"]),
+    find_missing_values(encounter, "discharge_date", "encounters.discharge_date"),
+    find_sentinel_values(encounter, "length_of_stay", -1, "encounters.length_of_stay"),
+                 
+]
+report = pd.DataFrame(results)
+print(report)
