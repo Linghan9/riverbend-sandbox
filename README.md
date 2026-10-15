@@ -121,8 +121,6 @@ wrong — not the data.
 
 ---
 
+## Also in this repo
 
-
-
-
-
+**[`sql-practice-v3/`](sql-practice-v3/)** — SQL and Python drills on a second made-up hospital dataset: stale extracts, reconciliation, snapshot archives, a small star schema and warehouse catalog search. Standard library only; run `python build_round3.py` inside the folder to generate the data.
