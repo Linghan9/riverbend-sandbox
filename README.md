@@ -124,3 +124,5 @@ wrong — not the data.
 ## Also in this repo
 
 **[`sql-practice-v3/`](sql-practice-v3/)** — SQL and Python drills on a second made-up hospital dataset: stale extracts, reconciliation, snapshot archives, a small star schema and warehouse catalog search. Standard library only; run `python build_round3.py` inside the folder to generate the data.
+
+**[`supply-chain/`](supply-chain/)** — Riverbend's supply chain for 2025: item master, vendors, GPO contracts, POs, receipts, invoices, surgical cases, preference cards, inventory and backorders. Twelve SQL questions on invoice matching, off-contract spend, cost per case, an implant conversion and stockouts, plus a glossary. Surgeon IDs match Riverbend's providers. Standard library only; run `python build_supply_chain.py` inside the folder.
