@@ -20,9 +20,12 @@
 -- Part A. The monthly extract
 -- ============================================================================
 
--- Q21. Both extracts were loaded straight from a report export. Find the rows in each
---      that aren't accounts, and read off which filter each export used.
---                                                            (expect 4 rows)
+-- Q21. When you export a report, the bottom of the file often has two extra lines
+--      that aren't data: a "Total" row and an "Applied filters: ..." line that says
+--      which filter the report had on. Both extract tables were loaded straight from
+--      exports like that, so each table has these 2 fake rows.
+--      Find them in both tables (hint: real account IDs are all numbers), then read
+--      what each "Applied filters" line says.                (expect 4 rows)
 
 
 -- Q22. The first file was sent as "the October extract." Using only the data inside it,
