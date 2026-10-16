@@ -1,0 +1,4 @@
+# Generated: rebuild with erp_export.py and load_extract.py
+extract/
+migration.db
+__pycache__/

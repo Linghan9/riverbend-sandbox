@@ -1,0 +1,34 @@
+kpi,key,value
+K1,Cardiolinx Medical,3567820.0
+K1,Meridian Joint Systems,1941670.0
+K1,"Apex Orthopedics, Inc.",1710500.0
+K1,Pulsar EP Systems,1542300.0
+K1,Keystone Surgical Supply,647145.0
+K1,Northbridge Medical Distribution,138866.25
+K1,Bluegate Med-Surg,10634.6
+K2,Matched,4716
+K2,Quantity exception,51
+K2,Price exception,49
+K2,No PO,35
+K3,Provider 002,4932.0
+K3,Provider 008,7844.43
+K3,Provider 014,4930.67
+K3,Provider 020,4995.77
+K3,Provider 026,4917.76
+K4,ABL,6659.61
+K4,ICD,21120.11
+K4,PPM,7117.2
+K4,THA,5961.72
+K4,TKA,5979.09
+K5,Implants,7104790.0
+K5,Med-Surg,911845.85
+K5,Physician Preference,1542300.0
+K6,Critical,8647090.0
+K6,Important,762345.0
+K6,Routine,149500.85
+K7,"Ablation Catheter, Contact Force",14
+K7,Defibrillation Lead,1
+K7,Meridian Tibial Insert,5
+K8,"L01 | Exam Gloves, Nitrile, Medium | 2025-10-06",5
+K8,"L01 | Bone Cement, 40 g | 2025-11-17",3
+K8,"L04 | Saline Flush, 10 mL | 2025-11-24",3

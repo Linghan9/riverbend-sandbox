@@ -105,3 +105,7 @@ All deliberate. Each one happens in real hospital supply chains.
 S12 builds `fact_case_supply`, one row per supply line on a completed case, with cost already converted to each. Around it: `surgeon`, `procedure`, `item_master`, `location` and a date table. Because the grain is a supply line, count cases with `DISTINCTCOUNT(case_id)`, not rows.
 
 A second fact table worth building is `invoice_line` with its match status from S6, at invoice-line grain, sharing the vendor (by tax ID) and item dimensions.
+
+## Round 2: the migration drill
+
+Once S1–S12 are done, `migration/` moves the same data through a new pipeline after a Tableau-to-Power BI migration. Every table loads, eight KPIs don't tie to the old dashboard, and the defects aren't listed. Start with `migration/README.md`.
